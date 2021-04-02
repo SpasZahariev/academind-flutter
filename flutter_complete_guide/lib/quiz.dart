@@ -48,6 +48,13 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void restartQuiz() {
+    setState(() {
+      _currentQuestion = 0;
+      _totalScore = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return _currentQuestion < _questions.length
@@ -61,6 +68,6 @@ class _QuizState extends State<Quiz> {
                   .toList(),
             ],
           )
-        : Result(_totalScore);
+        : Result(_totalScore, restartQuiz);
   }
 }
