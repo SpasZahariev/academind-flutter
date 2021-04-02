@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/model/inquiry.dart';
+import './question.dart';
+import './answer.dart';
 
 class Quiz extends StatefulWidget {
   @override
@@ -6,26 +9,34 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  final List<String> questions = [
-    'Question one?',
-    'Question twoo?!',
-    'How about question Three!??'
+  final List<Inquiry> _questions = [
+    Inquiry(
+        'What\'s your favourite color?', ['Blue', 'Red', 'Green', 'Yellow']),
+    Inquiry('What\'s your favourite letter?', ['a', 'b', 'c', 'd']),
+    Inquiry(
+        'What\'s your favourite planet?', ['Earth', 'Mars', 'Venus', 'Uranus']),
+    Inquiry('What\'s your favourite language?', ['C', 'C++', 'C#', 'F#']),
   ];
 
-  int currentQuestion = 0;
+  int _currentQuestion = 0;
 
   void answerQuestion() {
-    setState(() => currentQuestion += 1);
+    setState(() => _currentQuestion += 1);
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('${questions[currentQuestion]}'),
-        ElevatedButton(child: Text('Button 1'), onPressed: answerQuestion),
-        ElevatedButton(child: Text('Button 2'), onPressed: answerQuestion),
-        ElevatedButton(child: Text('Button 3'), onPressed: answerQuestion),
+        Question(_questions[_currentQuestion].questionText),
+        ..._questions[_currentQuestion]
+            .answers
+            .map((answerText) => Answer(answerQuestion, answerText))
+            .toList(),
+        // Answer(answerQuestion, _questions[_currentQuestion]['answers'][0]),
+        // Answer(answerQuestion, _questions[_currentQuestion]['answers'][1]),
+        // Answer(answerQuestion, _questions[_currentQuestion]['answers'][2]),
+        // Answer(answerQuestion, _questions[_currentQuestion]['answers'][3]),
       ],
     );
   }
