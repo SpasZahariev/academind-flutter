@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class Answer extends StatelessWidget {
   final Function _selectHandler;
   final String _answerOption;
+  final int _outcomeScore;
 
-  Answer(this._selectHandler, this._answerOption);
+  Answer(this._selectHandler, this._answerOption, this._outcomeScore);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class Answer extends StatelessWidget {
           onPrimary: Colors.black,
         ),
         child: Text(_answerOption),
-        onPressed: _selectHandler,
+        onPressed: () => _selectHandler(_outcomeScore),
       ),
     );
   }
